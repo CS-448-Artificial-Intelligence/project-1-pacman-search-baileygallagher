@@ -91,19 +91,27 @@ def depthFirstSearch(problem):
     dfs_stack.push(problem.getStartState(), [])
     is_goal = False
     visited = set()
-    path_map = map()
+    path_dict = dict()
+    goal = None
     while dfs_stack and not is_goal:
         current = dfs_stack.pop()
         if current.isGoalState():
             # should I make this a break?
+            goal = current
             is_goal = True
         successors = problem.getSuccessors(current)
         for node in successors:
             if node not in visited:
-                node_tuple = tuple(node[0], [current])
+                node_tuple = tuple(node[0], current)
                 dfs_stack.push(node_tuple)
-                path_map[node] = current
-        #for key in path_map:
+                path_dict[node] = current
+        tracing_from = goal
+        result = []
+        while tracing_from:
+            result.append(tracing_from)
+            tracing_from = path_dict[tracing_from]
+        return result
+
 
     # need to return solution, but don't know how
     # use dictionary to traceback path?
