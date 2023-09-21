@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc953a7-2b6a-427c-a08e-ee2a1b21085b" name="Changes" comment="path retracing broken but i think DFS is right" />
+    <list default="true" id="4cc953a7-2b6a-427c-a08e-ee2a1b21085b" name="Changes" comment="path retracing broken but i think DFS is right">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/search.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -21,13 +24,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/baije/OneDrive/Desktop/DBMS/project-1-pacman-search-baileygallagher/search/pacman.py"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/baije/OneDrive/Desktop/DBMS/project-1-pacman-search-baileygallagher/search/pacman.py&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Python.Tiny Maze DFS">
     <configuration name="GoWest" type="PythonConfigurationType" factoryName="Python">
       <module name="project-1-pacman-search-baileygallagher" />

@@ -93,7 +93,8 @@ def depthFirstSearch(problem):
     is_goal = False
     visited = set()
     path_dict = dict()
-    #path_dict[problem.getStartState()] = None
+    path_dict[problem.getStartState()] = None
+    visited.add(problem.getStartState())
     goal = None
     while dfs_stack and not is_goal:
         current = dfs_stack.pop()
@@ -106,15 +107,15 @@ def depthFirstSearch(problem):
         successors = problem.getSuccessors(current[0])
         print("Successors: ", successors)
         for node in successors:
-            if node not in visited:
+            if node[0] not in visited:
                 node_tuple = (node[0], current[0])
                 print("Node [0]: ", node[0])
                 print("Current: ", current)
                 print("NODE TUPLE: ", node_tuple)
                 dfs_stack.push(node_tuple)
                 print("CURRENT NODE: ", node)
-                path_dict[node] = current
-                visited.add(node)
+                path_dict[node[0]] = current[0]
+                visited.add(node[0])
     # isolate node?? index
     print("GOAL: ", goal)
     tracing_from = goal[0]
@@ -123,6 +124,7 @@ def depthFirstSearch(problem):
     while tracing_from:
         result.append(tracing_from)
         tracing_from = path_dict[tracing_from]
+    print("RESULT: ", result)
     return result
 
 
