@@ -87,36 +87,49 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
+    print("START STATE: ", problem.getStartState())
     dfs_stack = util.Stack()
-    dfs_stack.push(problem.getStartState(), [])
+    dfs_stack.push((problem.getStartState(), None))
     is_goal = False
     visited = set()
     path_dict = dict()
+    #path_dict[problem.getStartState()] = None
     goal = None
     while dfs_stack and not is_goal:
         current = dfs_stack.pop()
-        if current.isGoalState():
+        if problem.isGoalState(current[0]):
             # should I make this a break?
             goal = current
             is_goal = True
-        successors = problem.getSuccessors(current)
+            # added break but not sure
+            break
+        successors = problem.getSuccessors(current[0])
+        print("Successors: ", successors)
         for node in successors:
             if node not in visited:
-                node_tuple = tuple(node[0], current)
+                node_tuple = (node[0], current[0])
+                print("Node [0]: ", node[0])
+                print("Current: ", current)
+                print("NODE TUPLE: ", node_tuple)
                 dfs_stack.push(node_tuple)
+                print("CURRENT NODE: ", node)
                 path_dict[node] = current
-        tracing_from = goal
-        result = []
-        while tracing_from:
-            result.append(tracing_from)
-            tracing_from = path_dict[tracing_from]
-        return result
+                visited.add(node)
+    # isolate node?? index
+    print("GOAL: ", goal)
+    tracing_from = goal[0]
+    result = []
+    print("path dict: ", path_dict)
+    while tracing_from:
+        result.append(tracing_from)
+        tracing_from = path_dict[tracing_from]
+    return result
 
 
     # need to return solution, but don't know how
     # use dictionary to traceback path?
 
-    util.raiseNotDefined()
+    #util.raiseNotDefined()
 
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
