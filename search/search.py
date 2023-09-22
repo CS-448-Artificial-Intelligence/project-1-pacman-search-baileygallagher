@@ -87,45 +87,42 @@ def depthFirstSearch(problem):
     print("Start's successors:", problem.getSuccessors(problem.getStartState()))
     """
     "*** YOUR CODE HERE ***"
-    print("START STATE: ", problem.getStartState())
     dfs_stack = util.Stack()
-    dfs_stack.push((problem.getStartState(), None))
+    visited_states = set()
     is_goal = False
-    visited = set()
-    path_dict = dict()
-    path_dict[problem.getStartState()] = None
-    visited.add(problem.getStartState())
-    goal = None
-    while dfs_stack and not is_goal:
-        current = dfs_stack.pop()
-        if problem.isGoalState(current[0]):
-            # should I make this a break?
-            goal = current
+    starting_tuple = (problem.getStartState(), [])
+    dfs_stack.push(starting_tuple)
+    goal_tuple = None
+    #print("Start State: ", problem.getStartState())
+    while not is_goal and dfs_stack:
+        # checking if we ran out of possible nodes to check
+        if dfs_stack.isEmpty():
+            return "Failure"
+        # popping off node of interest (Top of stack)
+        parent_tuple = dfs_stack.pop()
+        if problem.isGoalState(parent_tuple[0]):
             is_goal = True
-            # added break but not sure
-            break
-        successors = problem.getSuccessors(current[0])
-        print("Successors: ", successors)
-        for node in successors:
-            if node[0] not in visited:
-                node_tuple = (node[0], current[0])
-                print("Node [0]: ", node[0])
-                print("Current: ", current)
-                print("NODE TUPLE: ", node_tuple)
-                dfs_stack.push(node_tuple)
-                print("CURRENT NODE: ", node)
-                path_dict[node[0]] = current[0]
-                visited.add(node[0])
-    # isolate node?? index
-    print("GOAL: ", goal)
-    tracing_from = goal[0]
-    result = []
-    print("path dict: ", path_dict)
-    while tracing_from:
-        result.append(tracing_from)
-        tracing_from = path_dict[tracing_from]
-    print("RESULT: ", result)
-    return result
+            goal_tuple = parent_tuple
+            # return parent's directions
+        elif parent_tuple[0] not in visited_states:
+            visited_states.add(parent_tuple[0])
+            successors = problem.getSuccessors(parent_tuple[0])
+            parent_state_path = parent_tuple[1]
+            for child in successors:
+                child_path = [] + parent_state_path
+                child_path.append(child[1])
+                child_tuple = (child[0], child_path)
+                dfs_stack.push(child_tuple)
+
+    if goal_tuple is not None:
+        print("Result Actions: ", goal_tuple[1])
+        return goal_tuple[1]
+    else:
+        print("NO RESULT")
+
+
+
+
 
 
     # need to return solution, but don't know how
