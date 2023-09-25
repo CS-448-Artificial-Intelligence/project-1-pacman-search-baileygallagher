@@ -121,36 +121,135 @@ def depthFirstSearch(problem):
         print("NO RESULT")
 
 
-
-
-
-
-    # need to return solution, but don't know how
-    # use dictionary to traceback path?
-
-    #util.raiseNotDefined()
-
 def breadthFirstSearch(problem):
     """Search the shallowest nodes in the search tree first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    bfs_queue = util.Queue()
+    visited_states = set()
+    is_goal = False
+    starting_tuple = (problem.getStartState(), [])
+    bfs_queue.push(starting_tuple)
+    goal_tuple = None
+    while not is_goal and bfs_queue:
+        # checking if we ran out of possible nodes to check
+        if bfs_queue.isEmpty():
+            return "Failure"
+        # popping off node of interest (Top of stack)
+        parent_tuple = bfs_queue.pop()
+        if problem.isGoalState(parent_tuple[0]):
+            is_goal = True
+            goal_tuple = parent_tuple
+            # return parent's directions
+        elif parent_tuple[0] not in visited_states:
+            visited_states.add(parent_tuple[0])
+            successors = problem.getSuccessors(parent_tuple[0])
+            parent_state_path = parent_tuple[1]
+            for child in successors:
+                child_path = [] + parent_state_path
+                child_path.append(child[1])
+                child_tuple = (child[0], child_path)
+                bfs_queue.push(child_tuple)
+
+    if goal_tuple is not None:
+        print("Result Actions: ", goal_tuple[1])
+        return goal_tuple[1]
+    else:
+        print("NO RESULT")
+
 
 def uniformCostSearch(problem):
     """Search the node of least total cost first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+
+    ucs_queue = util.PriorityQueue()
+    visited_states = set()
+    is_goal = False
+    starting_tuple = (problem.getStartState(), [], 0)
+    ucs_queue.push(starting_tuple, starting_tuple[2])
+    goal_tuple = None
+    while not is_goal and ucs_queue:
+        # checking if we ran out of possible nodes to check
+        if ucs_queue.isEmpty():
+            return "Failure"
+        # popping off node of interest (Top of stack)
+        parent_tuple = ucs_queue.pop()
+        if problem.isGoalState(parent_tuple[0]):
+            is_goal = True
+            goal_tuple = parent_tuple
+            # return parent's directions
+        elif parent_tuple[0] not in visited_states:
+            visited_states.add(parent_tuple[0])
+            successors = problem.getSuccessors(parent_tuple[0])
+            parent_state_path = parent_tuple[1]
+            for child in successors:
+                cost = child[2]
+                child_path = [] + parent_state_path
+                child_path.append(child[1])
+                child_tuple = (child[0], child_path)
+                ucs_queue.push(child_tuple,cost)
+
+    if goal_tuple is not None:
+        print("Result Actions: ", goal_tuple[1])
+        return goal_tuple[1]
+    else:
+        print("NO RESULT")
+
+
 
 def nullHeuristic(state, problem=None):
     """
     A heuristic function estimates the cost from the current state to the nearest
     goal in the provided SearchProblem.  This heuristic is trivial.
     """
+    ucs_queue = util.PriorityQueue()
     return 0
+
+#def aStar(node, problem, heuristic):
+def aStar(aStarParams):
+    # using for priority queue's function
+    node = aStarParams[0]
+    problem = aStarParams[1]
+    heuristic = aStarParams[2]
+    node_cost = node[2]
+    heuristic_cost = heuristic(node, problem)
+    cost = node_cost + heuristic_cost
+    return cost
+
 
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    util.raiseNotDefined()
+    astar_queue = util.PriorityQueueWithFunction(problem, astar)
+    visited_states = set()
+    is_goal = False
+    starting_tuple = (problem.getStartState(), [], 0)
+    astar_queue.push(starting_tuple)
+    goal_tuple = None
+    while not is_goal and astar_queue:
+        # checking if we ran out of possible nodes to check
+        if astar_queue.isEmpty():
+            return "Failure"
+        # popping off node of interest (Top of stack)
+        parent_tuple = astar_queue.pop()
+        if problem.isGoalState(parent_tuple[0]):
+            is_goal = True
+            goal_tuple = parent_tuple
+            # return parent's directions
+        elif parent_tuple[0] not in visited_states:
+            visited_states.add(parent_tuple[0])
+            successors = problem.getSuccessors(parent_tuple[0])
+            parent_state_path = parent_tuple[1]
+            for child in successors:
+                child_path = [] + parent_state_path
+                child_path.append(child[1])
+                child_tuple = (child[0], child_path)
+                astar_queue.push(child_tuple)
+
+    if goal_tuple is not None:
+        print("Result Actions: ", goal_tuple[1])
+        return goal_tuple[1]
+    else:
+        print("NO RESULT")
 
 
 # Abbreviations
