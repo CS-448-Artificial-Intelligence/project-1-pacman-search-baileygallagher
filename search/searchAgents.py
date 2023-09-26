@@ -297,8 +297,8 @@ class CornersProblem(search.SearchProblem):
         """
         "*** YOUR CODE HERE ***"
         # need to have pacman's starting xy coords and 4 corner booleans. Maybe isGoal too.
-        #start_state =
-        util.raiseNotDefined()
+        start_state = (self.startingPosition, (False, False, False, False))
+        return start_state
 
     def isGoalState(self, state):
         """
@@ -306,7 +306,8 @@ class CornersProblem(search.SearchProblem):
         """
         "*** YOUR CODE HERE ***"
         # once a corner is touched, set cornerX boolean to true in above. Once all four hit, set state to True.
-        if state:
+
+        if state[1][0] and state[1][1] and state[1][2] and state[1][3]:
             return True
         return False
 
@@ -321,6 +322,9 @@ class CornersProblem(search.SearchProblem):
             state, 'action' is the action required to get there, and 'stepCost'
             is the incremental cost of expanding to that successor
         """
+        "*** YOUR CODE HERE ***"
+        current_state = state
+        currentPosition = current_state[0]
 
         successors = []
         for action in [Directions.NORTH, Directions.SOUTH, Directions.EAST, Directions.WEST]:
@@ -331,7 +335,20 @@ class CornersProblem(search.SearchProblem):
             #   nextx, nexty = int(x + dx), int(y + dy)
             #   hitsWall = self.walls[nextx][nexty]
 
-            "*** YOUR CODE HERE ***"
+            state_bool = list(current_state[1])
+            x, y = currentPosition
+            dx, dy = Actions.directionToVector(action)
+            nextx, nexty = int(x + dx), int(y + dy)
+            hitsWall = self.walls[nextx][nexty]
+            if not hitsWall:
+                # if (nextx, nexty) in self.corners:
+                index = 0
+                for corner in self.corners:
+                    if nextx == corner[0] and nexty == corner[1]:
+                        state_bool[index] = True
+                    index += 1
+                successor = (((nextx, nexty), tuple(state_bool)), action, 1)
+                successors.append(successor)
 
         self._expanded += 1 # DO NOT CHANGE
         return successors
