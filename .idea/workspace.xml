@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4cc953a7-2b6a-427c-a08e-ee2a1b21085b" name="Changes" comment="DFS works">
+    <list default="true" id="4cc953a7-2b6a-427c-a08e-ee2a1b21085b" name="Changes" comment="UCS works but not A*">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/search/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/search/searchAgents.py" beforeDir="false" afterPath="$PROJECT_DIR$/search/searchAgents.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +32,28 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/baije/OneDrive/Desktop/DBMS/project-1-pacman-search-baileygallagher/search/pacman.py&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.Medium Maze DFS">
+  <component name="RunManager" selected="Python.Big A*">
+    <configuration name="Big A*" type="PythonConfigurationType" factoryName="Python" folderName="New Folder">
+      <module name="project-1-pacman-search-baileygallagher" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\baije\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/search" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/search/pacman.py" />
+      <option name="PARAMETERS" value="-l bigMaze -z .5 -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="GoWest" type="PythonConfigurationType" factoryName="Python">
       <module name="project-1-pacman-search-baileygallagher" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -46,6 +68,27 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/search/pacman.py" />
       <option name="PARAMETERS" value="--layout testMaze --pacman GoWestAgent" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Medium A*" type="PythonConfigurationType" factoryName="Python" folderName="New Folder">
+      <module name="project-1-pacman-search-baileygallagher" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="C:\Users\baije\AppData\Local\Programs\Python\Python310\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/search" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/search/pacman.py" />
+      <option name="PARAMETERS" value="-l mediumMaze -p SearchAgent -a fn=astar,heuristic=manhattanHeuristic" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
       <option name="MODULE_MODE" value="false" />
@@ -162,6 +205,8 @@
       <item itemvalue="Python.Medium Maze DFS" />
       <item itemvalue="Python.bigMaze DFS" />
       <item itemvalue="Python.Medium BFS" />
+      <item itemvalue="Python.Medium A*" />
+      <item itemvalue="Python.Big A*" />
       <item itemvalue="Python.Tiny Maze DFS" />
       <item itemvalue="Python.GoWest" />
       <item itemvalue="Python.Tiny Maze Search" />
@@ -211,7 +256,14 @@
       <option name="project" value="LOCAL" />
       <updated>1695346410274</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="UCS works but not A*">
+      <created>1695610905639</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1695610905639</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -231,6 +283,7 @@
     <MESSAGE value="path retracing broken but i think DFS is right" />
     <MESSAGE value="path works but result is Co-ords not directions, need to fix" />
     <MESSAGE value="DFS works" />
-    <option name="LAST_COMMIT_MESSAGE" value="DFS works" />
+    <MESSAGE value="UCS works but not A*" />
+    <option name="LAST_COMMIT_MESSAGE" value="UCS works but not A*" />
   </component>
 </project>

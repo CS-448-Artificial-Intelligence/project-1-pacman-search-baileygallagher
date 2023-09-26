@@ -186,7 +186,7 @@ def uniformCostSearch(problem):
                 child_path = [] + parent_state_path
                 child_path.append(child[1])
                 child_tuple = (child[0], child_path)
-                ucs_queue.push(child_tuple,cost)
+                ucs_queue.push(child_tuple, cost)
 
     if goal_tuple is not None:
         print("Result Actions: ", goal_tuple[1])
@@ -208,9 +208,12 @@ def nullHeuristic(state, problem=None):
 def aStar(aStarParams):
     # using for priority queue's function
     node = aStarParams[0]
-    problem = aStarParams[1]
-    heuristic = aStarParams[2]
-    node_cost = node[2]
+    problem = aStarParams[2]
+    heuristic = aStarParams[3]
+    if len(node) < 3:
+        node_cost = 0
+    else:
+        node_cost = node[2]
     heuristic_cost = heuristic(node, problem)
     cost = node_cost + heuristic_cost
     return cost
@@ -219,10 +222,11 @@ def aStar(aStarParams):
 def aStarSearch(problem, heuristic=nullHeuristic):
     """Search the node that has the lowest combined cost and heuristic first."""
     "*** YOUR CODE HERE ***"
-    astar_queue = util.PriorityQueueWithFunction(problem, astar)
+    astar_queue = util.PriorityQueueWithFunction(aStar)
     visited_states = set()
     is_goal = False
-    starting_tuple = (problem.getStartState(), [], 0)
+    start_state = problem.getStartState()
+    starting_tuple = (start_state, [], problem, heuristic)
     astar_queue.push(starting_tuple)
     goal_tuple = None
     while not is_goal and astar_queue:
@@ -242,8 +246,9 @@ def aStarSearch(problem, heuristic=nullHeuristic):
             for child in successors:
                 child_path = [] + parent_state_path
                 child_path.append(child[1])
-                child_tuple = (child[0], child_path)
-                astar_queue.push(child_tuple)
+                #child_tuple = (child[0], child_path)
+                aStar_tuple = (child[0], child_path, problem, heuristic)
+                astar_queue.push(aStar_tuple)
 
     if goal_tuple is not None:
         print("Result Actions: ", goal_tuple[1])

@@ -254,6 +254,7 @@ def manhattanHeuristic(position, problem, info={}):
     "The Manhattan distance heuristic for a PositionSearchProblem"
     xy1 = position
     xy2 = problem.goal
+
     return abs(xy1[0] - xy2[0]) + abs(xy1[1] - xy2[1])
 
 def euclideanHeuristic(position, problem, info={}):
@@ -295,6 +296,8 @@ class CornersProblem(search.SearchProblem):
         space)
         """
         "*** YOUR CODE HERE ***"
+        # need to have pacman's starting xy coords and 4 corner booleans. Maybe isGoal too.
+        #start_state =
         util.raiseNotDefined()
 
     def isGoalState(self, state):
@@ -302,7 +305,11 @@ class CornersProblem(search.SearchProblem):
         Returns whether this search state is a goal state of the problem.
         """
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        # once a corner is touched, set cornerX boolean to true in above. Once all four hit, set state to True.
+        if state:
+            return True
+        return False
+
 
     def getSuccessors(self, state):
         """
