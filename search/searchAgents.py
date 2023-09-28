@@ -289,6 +289,7 @@ class CornersProblem(search.SearchProblem):
         # Please add any code here which you would like to use
         # in initializing the problem
         "*** YOUR CODE HERE ***"
+        self.staringState = startingGameState
 
     def getStartState(self):
         """
@@ -367,6 +368,26 @@ class CornersProblem(search.SearchProblem):
         return len(actions)
 
 
+def furthestCornerHeuristic(state, problem):
+    corners = problem.corners
+    position = state[0]
+    corner_bools = state[1]
+
+    if problem.isGoalState(state):
+        return 0
+
+    furthest_corner_distance = 0
+    for i in range(len(corners)):
+        corner = corners[i]
+        if corner_bools[i] is False:
+            #manhattan_distance = abs(position[0] - corner[0]) + abs(position[1] - corner[1])
+            #euc_distance = ((position[0] - corner[0]) ** 2 + (position[1] - corner[1]) ** 2) ** 0.5
+            distance = mazeDistance(position, corner, problem.staringState)
+            if distance >= furthest_corner_distance:
+                furthest_corner_distance = distance
+
+    return furthest_corner_distance
+
 def cornersHeuristic(state, problem):
     """
     A heuristic for the CornersProblem that you defined.
@@ -380,11 +401,12 @@ def cornersHeuristic(state, problem):
     shortest path from the state to a goal of the problem; i.e.  it should be
     admissible (as well as consistent).
     """
-    corners = problem.corners # These are the corner coordinates
+    corners = problem.corners # These are the corner coordinates, ((corner1),(corner2),(corner3),(corner4))
     walls = problem.walls # These are the walls of the maze, as a Grid (game.py)
-
     "*** YOUR CODE HERE ***"
-    return 0 # Default to trivial solution
+    # state for this problem looks like ((Position), (Corner Bools))
+
+    return furthestCornerHeuristic(state, problem)
 
 class AStarCornersAgent(SearchAgent):
     "A SearchAgent for FoodSearchProblem using A* and your foodHeuristic"
@@ -478,7 +500,20 @@ def foodHeuristic(state, problem):
     """
     position, foodGrid = state
     "*** YOUR CODE HERE ***"
-    return 0
+    closest_true = float("inf")
+    position = state[0]
+    # just a greedy implementation for now
+    if problem.isGoalState(state):
+        return 0
+
+    for coord in foodGrid.asList():
+            # manhattan_distance = abs(position[0] - corner[0]) + abs(position[1] - corner[1])
+            # euc_distance = ((position[0] - corner[0]) ** 2 + (position[1] - corner[1]) ** 2) ** 0.5
+            distance = mazeDistance(position, coord, problem.startingGameState)
+            if distance <= closest_true:
+                closest_true = distance
+
+    return closest_true
 
 class ClosestDotSearchAgent(SearchAgent):
     "Search for all food using a sequence of searches"
@@ -509,7 +544,7 @@ class ClosestDotSearchAgent(SearchAgent):
         problem = AnyFoodSearchProblem(gameState)
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return search.breadthFirstSearch(problem)
 
 class AnyFoodSearchProblem(PositionSearchProblem):
     """
@@ -545,7 +580,7 @@ class AnyFoodSearchProblem(PositionSearchProblem):
         x,y = state
 
         "*** YOUR CODE HERE ***"
-        util.raiseNotDefined()
+        return self.food[x][y]
 
 def mazeDistance(point1, point2, gameState):
     """

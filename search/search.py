@@ -109,7 +109,7 @@ def basicSearch(problem, datastructure, useCost=False):
                         datastructure.push(child_node)
 
     if goal_tuple is not None:
-        print("Result Actions: ", goal_tuple[1])
+        #print("Result Actions: ", goal_tuple[1])
         return goal_tuple[1]
     else:
         print("NO RESULT")
@@ -210,7 +210,7 @@ def aStarSearch(problem, heuristic=nullHeuristic):
                     astar_queue.push(aStar_node)
 
     if goal_tuple is not None:
-        print("Result Actions: ", goal_tuple[1])
+        #print("Result Actions: ", goal_tuple[1])
         return goal_tuple[1]
     else:
         print("NO RESULT")
